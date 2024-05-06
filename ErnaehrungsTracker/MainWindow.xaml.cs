@@ -20,6 +20,6 @@ namespace ErnaehrungsTracker
         {
             InitializeComponent();ValidateValueCallback:; 
         }
-        //kjhsdfglk jhsdflgkjhdlfkjghsldkfjghgbddddddddddddddd
+        //kjhsdfglk jhsdflgkjhdlfkjghsldkfjghgbdddddddddddddddddd
     } 
 }
