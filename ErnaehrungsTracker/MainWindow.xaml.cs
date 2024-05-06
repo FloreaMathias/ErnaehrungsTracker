@@ -18,8 +18,8 @@ namespace ErnaehrungsTracker
     {
         public MainWindow()
         {
-            InitializeComponent();
+            InitializeComponent();ValidateValueCallback:; 
         }
-        //kjhsdfglk jhsdflgkjhdlfkjghsldkfjgh
-    }
+        //kjhsdfglk jhsdflgkjhdlfkjghsldkfjghgbddddddddddddddd
+    } 
 }
