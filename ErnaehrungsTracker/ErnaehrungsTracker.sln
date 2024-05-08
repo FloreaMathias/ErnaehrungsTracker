@@ -5,10 +5,6 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ErnaehrungsTracker", "ErnaehrungsTracker.csproj", "{E18F2A53-3870-4571-B37E-D3E15509825E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErnährungsProfil", "..\ErnährungsProfil\ErnährungsProfil.csproj", "{11B61429-411C-47BA-9AD4-4CA2B540EB0A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ErnährungsFirstScreen", "..\ErnährungsFirstScreen\ErnährungsFirstScreen.csproj", "{36F159C0-96A5-41D7-B296-29CBB1BDD01A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{E18F2A53-3870-4571-B37E-D3E15509825E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E18F2A53-3870-4571-B37E-D3E15509825E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E18F2A53-3870-4571-B37E-D3E15509825E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{11B61429-411C-47BA-9AD4-4CA2B540EB0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{11B61429-411C-47BA-9AD4-4CA2B540EB0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{11B61429-411C-47BA-9AD4-4CA2B540EB0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{11B61429-411C-47BA-9AD4-4CA2B540EB0A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36F159C0-96A5-41D7-B296-29CBB1BDD01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36F159C0-96A5-41D7-B296-29CBB1BDD01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36F159C0-96A5-41D7-B296-29CBB1BDD01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36F159C0-96A5-41D7-B296-29CBB1BDD01A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

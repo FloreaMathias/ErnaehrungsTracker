@@ -7,12 +7,5 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Canvas>
-        <Button Name="Add" Content="firtsScreen" HorizontalAlignment="Left" Margin="231,156,0,0" VerticalAlignment="Top" Height="24" Width="85" Click="Add_Click"/>
-        <Button Name="mam" Content="Breakfast" HorizontalAlignment="Left" VerticalAlignment="Top" Height="24" Width="85"  Canvas.Left="231" Canvas.Top="217" Click="mam_Click"/>
-        <Button Name="mama" Content="Lunch" HorizontalAlignment="Center" VerticalAlignment="Top" Height="24" Width="85"  Canvas.Left="231" Canvas.Top="269" Click="mama_Click"/>
-        <Button Name="mamam" Content="Dinner" HorizontalAlignment="Center" VerticalAlignment="Top" Height="24" Width="85"  Canvas.Left="231" Canvas.Top="322" Click="mamam_Click"/>
-        <Button Name="mamama" Content="Profil" HorizontalAlignment="Center" VerticalAlignment="Top" Height="24" Width="85"  Canvas.Left="241" Canvas.Top="373" RenderTransformOrigin="0.5,0.5" Click="mamama_Click"/>
-
-
     </Canvas>
 </Window>
