@@ -28,8 +28,9 @@
 
 
 Use & Todo:
-- stimulsoft
+- stimulsoft, für Dashboard
 - json zum speichern der daten
 - forecast
 - Wie lange man braucht bis das ziel erreicht ist
 - logging
+- progressbar wie lange man braucht bis das Zielgewicht erreicht ist 
