@@ -18,7 +18,7 @@ namespace ErnaehrungsTracker
     {
         public MainWindow()
         {
-            InitializeComponent();ValidateValueCallback:; 
+            InitializeComponent();
         }
 
     } 
