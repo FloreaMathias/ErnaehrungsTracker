@@ -6,17 +6,22 @@
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
         Title="Breakfast" Height="300" Width="500">
-    <Canvas Background="#252525">
-        <Button x:Name="AddButtonBreakfast" Content="Add" Canvas.Left="389" Canvas.Top="233" Height="41" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <ComboBox x:Name="OurMelasComboBoxBreakfast" Canvas.Left="26" Canvas.Top="91" Width="120"/>
-        <Label Content="Brakefast Meal:" Canvas.Left="26" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+    <Canvas Background="#252525" Margin="0,0,0,-29">
+        <Button x:Name="AddButtonBreakfast" Content="Add" Canvas.Left="26" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddButtonBreakfast_Click"/>
+        <Button x:Name="RemoveButtonBreakfast" Content="Remove" Canvas.Left="128" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="RemoveButtonBreakfast_Click"/>
+        <TextBox x:Name="CountTextBox" Canvas.Left="252" TextWrapping="Wrap" Text="" Canvas.Top="120" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White"/>
+
+        <ComboBox x:Name="OurMelasComboBoxBreakfast" Canvas.Left="26" Canvas.Top="91" Width="120" SelectionChanged="OurMelasComboBoxBreakfast_SelectionChanged"/>
+        <Label Content="Breakfast Meal:" Canvas.Left="26" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
         <Label Content="Our Meals:" Canvas.Left="26" Canvas.Top="60" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Others:" Canvas.Left="213" Canvas.Top="60" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
         <Label Content="Meal:" Canvas.Left="213" Canvas.Top="87" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Kcal:" Canvas.Left="338" Canvas.Top="87" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
-        <TextBox x:Name="OtherMealTextBoxBreakfast" Canvas.Left="252" TextWrapping="Wrap" Text="TextBox" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White" />
-        <TextBox x:Name="OtherKclaTexBoxBreakfast" Canvas.Left="372" TextWrapping="Wrap" Text="TextBox" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White"/>
-
+        <TextBox x:Name="OtherMealTextBoxBreakfast" Canvas.Left="252" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White" />
+        <TextBox x:Name="OtherKclaTexBoxBreakfast" Canvas.Left="372" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White"/>
+        <ListBox x:Name="BreakfastListBox" Height="100" Width="312" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="142"/>
+        <Label Content="How often:" Canvas.Left="184" Canvas.Top="112" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button x:Name="ExitButtonBreakfast_Kopieren" Content="Exit" Canvas.Left="232" Canvas.Top="252" Height="22" Width="80" Click="ExitButtonBreakfast_Click" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
     </Canvas>
 </Window>
