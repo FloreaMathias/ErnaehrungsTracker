@@ -31,5 +31,7 @@
 
         </Canvas>
         <ProgressBar x:Name="ProgressBarProfil" Height="10" Canvas.Left="54" Canvas.Top="123" Width="100"/>
+        <Button x:Name="BackButton" Content="Back" Canvas.Left="325" Canvas.Top="56" Click="BackButton_Click"/>
+        <TextBox x:Name="ProfileName" Canvas.Left="230" TextWrapping="Wrap" Text="" Canvas.Top="10" Width="95" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Window>

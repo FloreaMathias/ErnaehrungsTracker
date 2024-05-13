@@ -144,7 +144,11 @@ namespace ErnaehrungsTracker
             ((MainWindow)Application.Current.MainWindow).BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
         }
 
-
-
+        private void ProfilButton_Click(object sender, RoutedEventArgs e)
+        {
+            Profil profil = new Profil();
+            profil.Show();
+            Close();
+        }
     }
 }
