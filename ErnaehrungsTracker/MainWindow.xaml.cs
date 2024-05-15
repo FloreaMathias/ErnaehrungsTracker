@@ -16,17 +16,25 @@ namespace ErnaehrungsTracker
     /// </summary>
     public partial class MainWindow : Window
     {
-
         public double goalWeight;
         public double currentWeight;
         public string inputName;
         public DateTime startDate;
         private static int breakfastTotalCalories;
+        private static bool isFirstRun = true;
 
         public MainWindow()
         {
             InitializeComponent();
-            startFirstScreen();
+
+            if(isFirstRun)
+            {
+                btnstart.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnstart.Visibility = Visibility.Hidden;
+            }
         }
 
         public void startFirstScreen()
@@ -56,14 +64,11 @@ namespace ErnaehrungsTracker
             foodText.Text = "";
             trainingText.Text = "";
             remainingText.Text = "";
-
-
         }
-
 
         #region WaterCounter & Steps
 
-        private double waterCounter = 0; 
+        private double waterCounter = 0;
 
         private void addWater_Click(object sender, RoutedEventArgs e)
         {
@@ -109,7 +114,7 @@ namespace ErnaehrungsTracker
             }
             else
             {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Wassermenge ein.");
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Schrittzahl ein.");
             }
         }
 
@@ -133,7 +138,6 @@ namespace ErnaehrungsTracker
             }
         }
 
-
         #endregion
 
         private void openBreakfastMenu_Click(object sender, RoutedEventArgs e)
@@ -141,7 +145,7 @@ namespace ErnaehrungsTracker
             var openBreakfastScreen = new Breakfast();
             openBreakfastScreen.ShowDialog();
             breakfastTotalCalories = openBreakfastScreen.GetTotalCalories();
-            ((MainWindow)Application.Current.MainWindow).BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+            BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
         }
 
         private void ProfilButton_Click(object sender, RoutedEventArgs e)
@@ -149,6 +153,13 @@ namespace ErnaehrungsTracker
             Profil profil = new Profil();
             profil.Show();
             Close();
+        }
+
+        private void btnstart_Click(object sender, RoutedEventArgs e)
+        {
+            btnstart.Visibility = Visibility.Hidden;
+            isFirstRun = false;
+            startFirstScreen();
         }
     }
 }

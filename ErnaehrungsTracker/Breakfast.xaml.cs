@@ -1,146 +1,136 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ErnaehrungsTracker
 {
-    /// <summary>
-    /// Interaktionslogik für Breakfast.xaml
-    /// </summary>
     public partial class Breakfast : Window
     {
-        public Dictionary<string, int> meals = new Dictionary<string, int>();
-        public int TotalCalories { get; private set; }
+        private Dictionary<string, int> meals;
+        private List<int> mealCalories;
+        private List<string> savedEntries;
+
+        private string savedEntriesFilePath = "savedEntries.txt";
+
         public Breakfast()
         {
             InitializeComponent();
-            meals.Add("Oatmeal", 150);
-            meals.Add("Scrambled Eggs", 200);
-            meals.Add("Fruit Salad", 100);
-            UpdateComboBox();
-        }
 
-        private void UpdateComboBox()
-        {
-            OurMelasComboBoxBreakfast.ItemsSource = meals.Keys;
+            meals = new Dictionary<string, int>
+            {
+                { "Oatmeal", 150 },
+                { "Scrambled Eggs", 200 },
+                { "Fruit Salad", 100 }
+            };
+
+            mealCalories = new List<int>();
+            savedEntries = new List<string>();
+
+            LoadSavedEntries(); 
+
+            foreach(var meal in meals)
+            {
+                OurMelasComboBoxBreakfast.Items.Add(meal.Key);
+            }
+
+            OurMelasComboBoxBreakfast.SelectionChanged += OurMelasComboBoxBreakfast_SelectionChanged;
         }
 
         private void AddButtonBreakfast_Click(object sender, RoutedEventArgs e)
         {
-            string mealName = OtherMealTextBoxBreakfast.Text;
-            if(!string.IsNullOrWhiteSpace(mealName))
+            if(OurMelasComboBoxBreakfast.SelectedItem != null)
             {
-                int kcal;
-                if(int.TryParse(OtherKclaTexBoxBreakfast.Text, out kcal))
-                {
-                    if(!meals.ContainsKey(mealName))
-                    {
-                        meals.Add(mealName, kcal);
-                        UpdateComboBox();
-                    }
-                    int count;
-                    if(!int.TryParse(CountTextBox.Text, out count) || count < 1)
-                    {
-                        MessageBox.Show("Please enter a valid number for count.");
-                        return;
-                    }
-
-                    for(int i = 0; i < count; i++)
-                    {
-                        BreakfastListBox.Items.Add(mealName + " - " + kcal + " kcal");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please enter a valid number for kcal.");
-                }
+                string selectedMeal = OurMelasComboBoxBreakfast.SelectedItem.ToString();
+                AddMealToList(selectedMeal, meals[selectedMeal]);
+                OurMelasComboBoxBreakfast.SelectedIndex = -1;
             }
             else
             {
-                MessageBox.Show("Please enter a meal name.");
+                string otherMealName = OtherMealTextBoxBreakfast.Text.Trim();
+                string otherKcalText = OtherKclaTexBoxBreakfast.Text.Trim();
+
+                if(!string.IsNullOrWhiteSpace(otherMealName) && !string.IsNullOrWhiteSpace(otherKcalText) && int.TryParse(otherKcalText, out int otherKcal))
+                {
+                    AddMealToList(otherMealName, otherKcal);
+                    OtherMealTextBoxBreakfast.Clear();
+                    OtherKclaTexBoxBreakfast.Clear();
+                }
+                else
+                {
+                    MessageBox.Show("Bitte wählen Sie entweder eine Mahlzeit aus der Liste oder geben Sie den Namen und die Kalorien einer eigenen Mahlzeit ein.");
+                }
             }
         }
 
+        private void AddMealToList(string mealName, int kcal)
+        {
+            mealCalories.Add(kcal);
+            string entry = $"{mealName}: {kcal} kcal";
+            BreakfastListBox.Items.Add(entry);
+            savedEntries.Add(entry);
+            SaveEntriesToFile();
+        }
 
         private void RemoveButtonBreakfast_Click(object sender, RoutedEventArgs e)
         {
             if(BreakfastListBox.SelectedItem != null)
             {
-                string selectedMeal = BreakfastListBox.SelectedItem.ToString();
-                int index = selectedMeal.IndexOf('-');
-                if(index != -1)
-                {
-                    string mealName = selectedMeal.Substring(0, index - 1).Trim();
-                    if(meals.ContainsKey(mealName))
-                    {
-                        meals.Remove(mealName);
-                        UpdateComboBox();
-                    }
-                    BreakfastListBox.Items.Remove(selectedMeal);
-                }
+                string selectedEntry = BreakfastListBox.SelectedItem.ToString();
+                BreakfastListBox.Items.Remove(selectedEntry);
+                savedEntries.Remove(selectedEntry);
+                SaveEntriesToFile(); 
             }
             else
             {
-                MessageBox.Show("Please select a meal to remove.");
+                MessageBox.Show("Bitte wählen Sie eine Mahlzeit zum Entfernen aus der Liste aus.");
             }
         }
 
-        private void OurMelasComboBoxBreakfast_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LoadSavedEntries()
         {
-            if(OurMelasComboBoxBreakfast.SelectedItem != null)
+            if(File.Exists(savedEntriesFilePath))
             {
-                string selectedMeal = OurMelasComboBoxBreakfast.SelectedItem.ToString();
-
-                if(!BreakfastListBox.Items.Contains(selectedMeal + " - " + meals[selectedMeal] + " kcal"))
+                savedEntries.AddRange(File.ReadAllLines(savedEntriesFilePath));
+                foreach(var entry in savedEntries)
                 {
-                    BreakfastListBox.Items.Add(selectedMeal + " - " + meals[selectedMeal] + " kcal");
-                    CalculateTotalKcal(); 
+                    BreakfastListBox.Items.Add(entry);
                 }
             }
         }
-        private void CalculateTotalKcal()
-        {
-            int totalKcal = 0;
-            foreach(var item in BreakfastListBox.Items)
-            {
-                string mealDetails = item.ToString();
-                int index = mealDetails.LastIndexOf('-');
-                if(index != -1)
-                {
-                    string kcalString = mealDetails.Substring(index + 1).Trim();
-                    if(int.TryParse(kcalString, out int kcal))
-                    {
-                        totalKcal += kcal;
-                    }
-                }
-            }
 
-            TotalCalories = totalKcal;
-        }
-        public int GetTotalCalories()
+        private void SaveEntriesToFile()
         {
-            CalculateTotalKcal(); 
-            return TotalCalories; 
+            File.WriteAllLines(savedEntriesFilePath, savedEntries);
         }
-
         private void ExitButtonBreakfast_Click(object sender, RoutedEventArgs e)
         {
-            CalculateTotalKcal();
-
-            ((MainWindow)Application.Current.MainWindow).BreakFastKcal.Text = $"{TotalCalories} kcal";
-
             this.Close();
         }
 
+        public int GetTotalCalories()
+        {
+            int totalCalories = 0;
+            foreach(int kcal in mealCalories)
+            {
+                totalCalories += kcal;
+            }
+            return totalCalories;
+        }
+        private void OurMelasComboBoxBreakfast_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            if(OurMelasComboBoxBreakfast.SelectedItem != null)
+            {
+                OtherMealTextBoxBreakfast.Clear();
+                OtherKclaTexBoxBreakfast.Clear();
+                OtherMealTextBoxBreakfast.IsEnabled = false;
+                OtherKclaTexBoxBreakfast.IsEnabled = false;
+            }
+            else
+            {
+                OtherMealTextBoxBreakfast.IsEnabled = true;
+                OtherKclaTexBoxBreakfast.IsEnabled = true;
+            }
+        }
     }
 }

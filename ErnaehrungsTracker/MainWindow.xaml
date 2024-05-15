@@ -86,6 +86,7 @@
         <Button x:Name="ProfilButton" Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click" >
 
         </Button>
+        <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/>
 
     </Canvas>
 

@@ -16,10 +16,14 @@ namespace ErnaehrungsTracker
     /// </summary>
     public partial class Profil : Window
     {
-        
+
+        public double currentWeight;
+
+
         public Profil()
         {
             InitializeComponent();
+
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -28,15 +32,7 @@ namespace ErnaehrungsTracker
             main.Show();
             Close();
         }
-        public void startFirstScreen()
-        {
-            var startScreen = new FirstScreen();
-            startScreen.ShowDialog();
-            ProfilWeightTextBox.Text = Convert.ToString(startScreen.currentWeight);
-            ProfilDate.Content = startScreen.startDate;
-            ProfileName.Text = startScreen.inputName;
-           
-        }
-        
+
+     
     }
 }
