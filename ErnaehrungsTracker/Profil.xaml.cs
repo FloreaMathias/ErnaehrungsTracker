@@ -20,7 +20,6 @@ namespace ErnaehrungsTracker
         public Profil()
         {
             InitializeComponent();
-            startFirstScreen();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

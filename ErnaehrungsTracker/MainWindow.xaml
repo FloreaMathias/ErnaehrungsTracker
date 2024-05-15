@@ -82,11 +82,11 @@
         <Canvas Width="122" Height="154" Background="#FF404040" Canvas.Left="655" Canvas.Top="181">
             <!--Kleiner Grafik -->
         </Canvas>
-    
-         <Button x:Name="ProfilButton" Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click" >
-            
+
+        <Button x:Name="ProfilButton" Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click" >
+
         </Button>
-    
+
     </Canvas>
 
 </Window>
