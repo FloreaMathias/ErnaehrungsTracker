@@ -7,14 +7,11 @@
         mc:Ignorable="d"
         Title="FirstScreen" Height="270" Width="616">
     <Canvas Background="#272727">
-
         <Label Content="Name:" Canvas.Left="350" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="77" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-
         <Label Content="Current Weight:" Canvas.Left="53" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="168" FontSize="22" FontWeight="Bold"/>
         <Label Content="Kg" Canvas.Left="277" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="47" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Kg" Canvas.Left="277" Canvas.Top="107" Foreground="#FFC300FF" Height="46" Width="47" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Goal Weight:" Canvas.Left="53" Canvas.Top="107" Foreground="#FFC300FF" Height="46" Width="168" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Goal Weight:" Canvas.Left="53" Canvas.Top="107" Foreground="#FFC300FF" Height="46" Width="168" FontSize="22" FontWeight="Bold"/>
         <Label Content="Date:" Canvas.Left="154" Canvas.Top="188" Foreground="#FFC300FF" Height="46" Width="76" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox x:Name="CurrentWeightTextBox" Canvas.Left="221" BorderBrush="#272727" Text="00" Canvas.Top="39" Width="51" Background="#252525" Foreground="White" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
         <TextBox x:Name="GoalWeightTextBox" Canvas.Left="221" BorderBrush="#272727" Text="00" Canvas.Top="113" Width="51" Background="#252525" Foreground="White" Height="40" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"/>

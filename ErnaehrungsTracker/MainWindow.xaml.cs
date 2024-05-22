@@ -150,9 +150,10 @@ namespace ErnaehrungsTracker
 
         private void ProfilButton_Click(object sender, RoutedEventArgs e)
         {
-            Profil profil = new Profil();
-            profil.Show();
-            Close();
+            Profil profilWindow = new Profil(currentWeight, goalWeight, inputName, startDate);
+            profilWindow.Show();
+            this.Close();
+
         }
 
         private void btnstart_Click(object sender, RoutedEventArgs e)

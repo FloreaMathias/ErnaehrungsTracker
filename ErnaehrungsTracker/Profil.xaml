@@ -6,32 +6,43 @@
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
         Title="Profil" Height="400" Width="550">
-    <Canvas Background="#272727" >
+    <Canvas Background="#272727">
         <Label Content="Weight:" Canvas.Left="53" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="96" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Stats" Canvas.Left="449" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="67" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Date" Canvas.Left="48" Canvas.Top="153" Foreground="#FFC300FF" Height="46" Width="66" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="Goal Weight:" Canvas.Left="53" Canvas.Top="127" Foreground="#FFC300FF" Height="34" Width="168" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Date:" Canvas.Left="48" Canvas.Top="174" Foreground="#FFC300FF" Height="46" Width="66" FontSize="22" FontWeight="Bold"/>
         <Button x:Name="ProfilLoadButton" Content="Load" Canvas.Left="449" Canvas.Top="100" Height="33" Width="67"/>
-        <Button x:Name="ProfilSaveButton" Content="Save" Canvas.Left="449" Canvas.Top="153" Height="33" Width="67" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Button x:Name="RemoveWaterButton" Content="-" Width="31" Height="31" Canvas.Left="32" Canvas.Top="74" RenderTransformOrigin="1.04,0.517" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22"/>
-        <TextBox x:Name="ProfilWeightTextBox" Canvas.Left="68" TextWrapping="Wrap" Text="" Canvas.Top="79" Width="66" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <Button x:Name="AddWaterButton" Content="+" Width="31" Height="31" Canvas.Left="139" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="22"/>
-        <Rectangle Height="37" Canvas.Left="166" Stroke="#FFCECECE" Canvas.Top="76" Width="6" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5" VerticalAlignment="Top" Fill="White" >
+        <Button x:Name="ProfilSaveButton" Content="Save" Canvas.Left="449" Canvas.Top="153" Height="33" Width="67"/>
+        <Button x:Name="RemoveWeightButton" Content="-" Width="31" Height="31" Canvas.Left="32" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="removeWeight_Click"/>
+        <TextBox x:Name="ProfilWeightTextBoxINPUT" Canvas.Left="68" TextWrapping="Wrap" Text="" Canvas.Top="79" Width="66" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Button x:Name="AddWeightButton" Content="+" Width="31" Height="31" Canvas.Left="139" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="addWeight_Click"/>
+        <TextBlock x:Name="kgremain" Canvas.Left="187" TextWrapping="Wrap" Text="00" Canvas.Top="83" Foreground="White" FontWeight="Normal" FontSize="15" RenderTransformOrigin="2.35,0.546">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.769"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-0.654"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Label x:Name="ProfilDate" Content="dd.mm.yyyy" Canvas.Left="48" Canvas.Top="196" Foreground="White" FontSize="15"/>
+        <Canvas Width="468" Height="153" Canvas.Left="48" Canvas.Top="225" Background="#404040"/>
+        <Button x:Name="BackButton" Content="Back" Canvas.Left="325" Canvas.Top="56" Click="BackButton_Click"/>
+        <TextBlock x:Name="GoalWeightTextBox" Canvas.Left="163" TextWrapping="Wrap" Text="00" Canvas.Top="136" Foreground="White"/>
+        <TextBlock x:Name="CurrentextBox" Canvas.Left="163" TextWrapping="Wrap" Text="00" Canvas.Top="115" Foreground="White"/>
+
+
+        <TextBox x:Name="ProfileName" Canvas.Left="230" TextWrapping="Wrap" Text="" Canvas.Top="10" Width="95" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31"/>
+        <Label Content="Current Weight:" Canvas.Left="32" Canvas.Top="105" Foreground="#FFC300FF" Height="36" Width="124" FontSize="15" FontWeight="Bold"/>
+        <Rectangle Height="28" Canvas.Left="175" Stroke="white" Canvas.Top="81" Width="2" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="0.2"/>
+                    <ScaleTransform ScaleX="1"/>
                     <SkewTransform/>
                     <RotateTransform/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Label  Content="xx kg remains" Canvas.Left="189" Canvas.Top="82" Foreground="White"/>
-        <Label x:Name="ProfilDate" Content="dd.mm.yyyy" Canvas.Left="48" Canvas.Top="196" Foreground="White" FontSize="15"/>
-        <Canvas Width="468" Height="153" Canvas.Left="48" Canvas.Top="231" HorizontalAlignment="Center" VerticalAlignment="Top" Background="#404040">
-
-        </Canvas>
-        <ProgressBar x:Name="ProgressBarProfil" Height="10" Canvas.Left="54" Canvas.Top="123" Width="100"/>
-        <Button x:Name="BackButton" Content="Back" Canvas.Left="325" Canvas.Top="56" Click="BackButton_Click"/>
-        <TextBox x:Name="ProfileName" Canvas.Left="230" TextWrapping="Wrap" Text="" Canvas.Top="10" Width="95" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" HorizontalAlignment="Left" VerticalAlignment="Center"/>
     </Canvas>
 </Window>

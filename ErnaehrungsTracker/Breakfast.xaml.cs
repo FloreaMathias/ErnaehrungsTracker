@@ -27,7 +27,7 @@ namespace ErnaehrungsTracker
             mealCalories = new List<int>();
             savedEntries = new List<string>();
 
-            LoadSavedEntries(); 
+                LoadSavedEntries(); 
 
             foreach(var meal in meals)
             {
