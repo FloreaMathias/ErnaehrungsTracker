@@ -53,6 +53,7 @@ namespace ErnaehrungsTracker
             }
 
         private double weightCounter = 0;
+       
         private void addWeight_Click(object sender, RoutedEventArgs e)
         {
             if(double.TryParse(ProfilWeightTextBoxINPUT.Text, out double weightToAdd))
@@ -62,13 +63,16 @@ namespace ErnaehrungsTracker
             }
             else
             {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Wassermenge ein.");
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für das Gewicht ein.");
             }
         }
 
         private void removeWeight_Click(object sender, RoutedEventArgs e)
         {
-
+            if(double.TryParse(ProfilWeightTextBoxINPUT.Text, out double weightToRemove2))
+            {
+                //
+            }
         }
     }
     }
