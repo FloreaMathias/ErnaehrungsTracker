@@ -17,7 +17,7 @@ namespace ErnaehrungsTracker
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            if(int.TryParse(GoalWeightTextBox.Text, out int goalWeightValue))
+            if(double.TryParse(GoalWeightTextBox.Text, out double goalWeightValue))
             {
                 goalWeight = goalWeightValue;
             }
@@ -27,7 +27,7 @@ namespace ErnaehrungsTracker
                 return;
             }
 
-            if(int.TryParse(CurrentWeightTextBox.Text, out int currentWeightValue))
+            if(double.TryParse(CurrentWeightTextBox.Text, out double currentWeightValue))
             {
                 currentWeight = currentWeightValue;
             }
@@ -40,7 +40,24 @@ namespace ErnaehrungsTracker
             inputName = InputNameTextBox.Text;
             startDate = StartDatePicker.SelectedDate ?? DateTime.Now;
 
+            double dailyCalories = CalculateDailyCalories(currentWeight, goalWeight, startDate);
+
+            MainWindow mainWindow = new MainWindow(goalWeight, currentWeight, inputName, dailyCalories);
+            mainWindow.Show();
             this.Close();
+        }
+
+        private double CalculateDailyCalories(double currentWeight, double goalWeight, DateTime startDate)
+        {
+            double weightDifference = currentWeight - goalWeight;
+            double daysToGoal = (startDate - DateTime.Now).TotalDays;
+
+            double totalCalorieDeficit = weightDifference * 7700;
+            double dailyCalorieDeficit = totalCalorieDeficit / daysToGoal;
+
+            double dailyCalories = 2000 - dailyCalorieDeficit;
+
+            return dailyCalories;
         }
     }
 }

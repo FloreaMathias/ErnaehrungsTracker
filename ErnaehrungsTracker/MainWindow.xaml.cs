@@ -11,9 +11,6 @@ using System.Windows.Shapes;
 
 namespace ErnaehrungsTracker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public double goalWeight;
@@ -22,11 +19,24 @@ namespace ErnaehrungsTracker
         public DateTime startDate;
         private static int breakfastTotalCalories;
         private static bool isFirstRun = true;
+        private double waterCounter = 0;
+        private double stepsCounter = 0;
+        private double trainingCalories = 0;
+        private double dailyCalories;
+
 
         public MainWindow()
         {
             InitializeComponent();
-
+        }
+        public MainWindow(double goalWeight, double currentWeight, string inputName, double dailyCalories)
+        {
+            InitializeComponent();
+            this.goalWeight = goalWeight;
+            this.currentWeight = currentWeight;
+            this.inputName = inputName;
+            this.dailyCalories = dailyCalories;
+            
             if(isFirstRun)
             {
                 btnstart.Visibility = Visibility.Visible;
@@ -34,6 +44,21 @@ namespace ErnaehrungsTracker
             else
             {
                 btnstart.Visibility = Visibility.Hidden;
+            }
+            welcomeTextBox.Text = $"Welcome, {inputName}!";
+            goalText.Text = dailyCalories.ToString("F0");
+
+            UpdateFoodCalories();
+        }
+        private void UpdateFoodCalories()
+        {
+            if(double.TryParse(BreakFastKcal.Text.Split(' ')[0], out double breakfastCalories) &&
+                double.TryParse(LunchKcal.Text.Split(' ')[0], out double lunchCalories) &&
+                double.TryParse(DinnerKcal.Text.Split(' ')[0], out double dinnerCalories) &&
+                double.TryParse(SnacksKcal.Text.Split(' ')[0], out double snacksCalories))
+            {
+                double totalFoodCalories = breakfastCalories + lunchCalories + dinnerCalories + snacksCalories;
+                foodText.Text = totalFoodCalories.ToString("F0");
             }
         }
 
@@ -59,16 +84,14 @@ namespace ErnaehrungsTracker
             double currentWeightKcal = Math.Round(currentWeight * conversionFactor);
 
             goalText.Text = $"{goalWeightKcal}";
-            //currentText.Text = $"{currentWeightKcal}";
-
             foodText.Text = "";
             trainingText.Text = "";
             remainingText.Text = "";
+
+            UpdateRemainingCalories();
         }
 
         #region WaterCounter & Steps
-
-        private double waterCounter = 0;
 
         private void addWater_Click(object sender, RoutedEventArgs e)
         {
@@ -103,14 +126,20 @@ namespace ErnaehrungsTracker
             }
         }
 
-        private double stepsCounter = 0;
-
         private void addSteps_Click(object sender, RoutedEventArgs e)
         {
             if(double.TryParse(countSteps.Text, out double stepsToAdd))
             {
                 stepsCounter += stepsToAdd;
                 currentSteps.Text = stepsCounter.ToString("0.0");
+
+                double kilometers = StepsToKilometers(stepsToAdd);
+                double calories = KilometersToCalories(kilometers);
+
+                trainingCalories += calories;
+                trainingText.Text = trainingCalories.ToString("0.0");
+
+                UpdateRemainingCalories();
             }
             else
             {
@@ -126,6 +155,14 @@ namespace ErnaehrungsTracker
                 {
                     stepsCounter -= stepsToRemove;
                     currentSteps.Text = stepsCounter.ToString("0.0");
+
+                    double kilometers = StepsToKilometers(stepsToRemove);
+                    double calories = KilometersToCalories(kilometers);
+
+                    trainingCalories -= calories;
+                    trainingText.Text = trainingCalories.ToString("0.0");
+
+                    UpdateRemainingCalories();
                 }
                 else
                 {
@@ -138,14 +175,55 @@ namespace ErnaehrungsTracker
             }
         }
 
+        private double StepsToKilometers(double steps)
+        {
+            return steps;
+        }
+
+        private double KilometersToCalories(double kilometers)
+        {
+            double caloriesPerKilometer = 7.0;
+
+            return kilometers * caloriesPerKilometer;
+        }
+
+
+        private void UpdateRemainingCalories()
+        {
+            if(double.TryParse(goalText.Text, out double goalCalories) &&
+                double.TryParse(foodText.Text, out double foodCalories))
+            {
+                double remainingCalories = goalCalories - foodCalories + trainingCalories;
+                remainingText.Text = remainingCalories.ToString("0.0");
+            }
+            else
+            {
+                remainingText.Text = "Error";
+            }
+        }
+
         #endregion
 
         private void openBreakfastMenu_Click(object sender, RoutedEventArgs e)
         {
-            var openBreakfastScreen = new Breakfast();
-            openBreakfastScreen.ShowDialog();
-            breakfastTotalCalories = openBreakfastScreen.GetTotalCalories();
-            BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+            /* var openBreakfastScreen = new Breakfast();
+             openBreakfastScreen.ShowDialog();
+             breakfastTotalCalories = openBreakfastScreen.GetTotalCalories();
+             BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+
+             if(double.TryParse(foodText.Text, out double foodCalories))
+             {
+                 foodCalories += breakfastTotalCalories;
+                 foodText.Text = foodCalories.ToString("0.0");
+                 UpdateRemainingCalories();
+             }*/
+
+            Breakfast breakfastWindow = new Breakfast();
+            breakfastWindow.ShowDialog();
+
+            BreakFastKcal.Text = $"{breakfastWindow.GetTotalCalories()} kcal";
+            UpdateFoodCalories();
+            UpdateRemainingCalories();
         }
 
         private void ProfilButton_Click(object sender, RoutedEventArgs e)
@@ -153,7 +231,6 @@ namespace ErnaehrungsTracker
             Profil profilWindow = new Profil(currentWeight, goalWeight, inputName, startDate);
             profilWindow.Show();
             this.Close();
-
         }
 
         private void btnstart_Click(object sender, RoutedEventArgs e)

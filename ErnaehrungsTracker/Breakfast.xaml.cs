@@ -11,7 +11,7 @@ namespace ErnaehrungsTracker
         private List<int> mealCalories;
         private List<string> savedEntries;
 
-        private string savedEntriesFilePath = "savedEntries.txt";
+        private string savedEntriesFilePath = "Breakfast_entries.txt";
 
         public Breakfast()
         {
@@ -21,7 +21,8 @@ namespace ErnaehrungsTracker
             {
                 { "Oatmeal", 150 },
                 { "Scrambled Eggs", 200 },
-                { "Fruit Salad", 100 }
+                { "Fruit Salad", 100 },
+                
             };
 
             mealCalories = new List<int>();

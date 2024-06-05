@@ -61,21 +61,21 @@
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="220">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Lunch" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <TextBlock x:Name="LunchKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
             <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
         </Canvas>
 
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="260">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Dinner" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <TextBlock x:Name="DinnerKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
             <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
         </Canvas>
 
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="300">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Snacks" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <TextBlock x:Name="SnacksKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
             <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
         </Canvas>
 
@@ -83,11 +83,12 @@
             <!--Kleiner Grafik -->
         </Canvas>
 
-        <Button x:Name="ProfilButton" Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click" >
+        <Button x:Name="ProfilButton" Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click" />
 
-        </Button>
+        
         <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/>
-
-    </Canvas>
+       
+        
+        </Canvas>
 
 </Window>
