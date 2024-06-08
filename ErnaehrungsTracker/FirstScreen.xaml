@@ -5,21 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="FirstScreen" Height="270" Width="616">
-    <Canvas Background="#272727">
+        Title="FirstScreen" Height="500" Width="616">
+    <Grid Background="#272727" Width="616" Height="500" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
 
-        <Label Content="Name:" Canvas.Left="350" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="77" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+    <Label Content="Name:" Grid.Row="0" Foreground="#FFC300FF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,40,0,0"/>
+    <TextBox x:Name="InputNameTextBox" Grid.Row="1" Width="200" Background="#252525" Foreground="White" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+
+    <Label Content="Current Weight:" Grid.Row="2" Foreground="#FFC300FF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+    <TextBox x:Name="CurrentWeightTextBox" Grid.Row="3" Width="150" Background="#252525" Foreground="White" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+
+    <Label Content="Goal Weight:" Grid.Row="4" Foreground="#FFC300FF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,0"/>
+    <TextBox x:Name="GoalWeightTextBox" Grid.Row="5" Width="150" Background="#252525" Foreground="White" FontSize="18" FontWeight="Bold" TextAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+
+    <Label Content="Date:" Grid.Row="6" Foreground="#FFC300FF" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,20,0,0" VerticalAlignment="Top"/>
+    <DatePicker x:Name="GoalDatePicker" Grid.Row="7" Width="200" Foreground="Black" FontSize="18" FontWeight="Bold" Margin="0,10,0,0" VerticalAlignment="Top"/>
+    <!--
+    <ComboBox x:Name="GoalComboBox" Grid.Row="1" Width="150" Margin="0,0,450,0" SelectedIndex="0">
+        <ComboBoxItem Content="Gewichtsverlust"/>
+        <ComboBoxItem Content="Muskelaufbau"/>
+        <ComboBoxItem Content="Allgemeine Gesundheit"/>
+    </ComboBox>
+    -->
+    <Button Content="Confirm" Grid.Row="8" Width="100" Background="#FFC300FF" Foreground="#272727" FontSize="18" Click="ConfirmButton_Click" HorizontalAlignment="Center" Margin="0,75,0,0" VerticalAlignment="Top"/>
+</Grid>
 
 
-        <Label Content="Current Weight:" Canvas.Left="53" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="168" FontSize="22" FontWeight="Bold"/>
-        <Label Content="Kg" Canvas.Left="277" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="47" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Kg" Canvas.Left="277" Canvas.Top="107" Foreground="#FFC300FF" Height="46" Width="47" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Goal Weight:" Canvas.Left="53" Canvas.Top="107" Foreground="#FFC300FF" Height="46" Width="168" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Date:" Canvas.Left="154" Canvas.Top="188" Foreground="#FFC300FF" Height="46" Width="76" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <TextBox x:Name="CurrentWeightTextBox" Canvas.Left="221" BorderBrush="#272727" Text="00" Canvas.Top="39" Width="51" Background="#252525" Foreground="White" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
-        <TextBox x:Name="GoalWeightTextBox" Canvas.Left="221" BorderBrush="#272727" Text="00" Canvas.Top="113" Width="51" Background="#252525" Foreground="White" Height="40" VerticalAlignment="Center" FontSize="22" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap" HorizontalAlignment="Center"/>
-        <DatePicker x:Name="StartDatePicker" Canvas.Left="246" BorderBrush="#272727" Canvas.Top="192" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" />
-        <Button Content="Confirm" Canvas.Left="445" Canvas.Top="159" Click="ConfirmButton_Click"/>
-        <TextBox x:Name="InputNameTextBox" Canvas.Left="432" BorderBrush="#272727" Text="" Canvas.Top="39" Width="138" Background="#252525" Foreground="White" Height="32" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="22" FontWeight="Bold" TextAlignment="Center" TextWrapping="Wrap"/>
-    </Canvas>
+
+
 </Window>

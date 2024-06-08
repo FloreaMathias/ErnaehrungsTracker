@@ -1,32 +1,58 @@
-﻿using System.Text;
+﻿using ErnaehrungsTracker.Models;
+using System;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ErnaehrungsTracker
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public UserProfile UserProfile { get; private set; }
+        public WaterCounter WaterCounter { get; private set; } = new WaterCounter();
+        public StepsCounter StepsCounter { get; private set; } = new StepsCounter();
+        
+        private static int breakfastTotalCalories = 0;
+        private static int lunchTotalCalories = 0;
+        private static int dinnerTotalCalories = 0;
+        private static int snacksTotalCalories = 0;
+        private double stepsCounter = 0;
+        private double trainingCalories = 0;
+        private static bool isFirstRun = true;
 
-        public double goalWeight;
-        public double currentWeight;
-        public string inputName;
-        public DateTime startDate;
-        private static int breakfastTotalCalories;
 
         public MainWindow()
         {
             InitializeComponent();
-            startFirstScreen();
+            SetupUI();
+        }
+
+        public MainWindow(UserProfile userProfile)
+        {
+            InitializeComponent();
+            UserProfile = userProfile;
+            SetupUI();
+        }
+
+        private void SetupUI()
+        {
+            if (isFirstRun)
+            {
+                btnstart.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnstart.Visibility = Visibility.Hidden;
+            }
+
+            if (UserProfile != null)
+            {
+                welcomeTextBox.Text = $"Welcome, {UserProfile.Name}!";
+                Calc_kg_to_kcal();
+                BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";  
+                LunchKcal.Text = $"{lunchTotalCalories} kcal";  
+                DinnerKcal.Text = $"{dinnerTotalCalories} kcal";  
+                SnacksKcal.Text = $"{snacksTotalCalories} kcal";  
+            }
         }
 
         public void startFirstScreen()
@@ -34,11 +60,8 @@ namespace ErnaehrungsTracker
             var startScreen = new FirstScreen();
             startScreen.ShowDialog();
 
-            goalWeight = startScreen.goalWeight;
-            currentWeight = startScreen.currentWeight;
-            startDate = startScreen.startDate;
-            inputName = startScreen.inputName;
-            welcomeTextBox.Text = $"Welcome, {inputName}!";
+            UserProfile = new UserProfile(startScreen.inputName, startScreen.startWeight, startScreen.currentWeight, startScreen.goalWeight, startScreen.startDate, startScreen.goalDate);
+            welcomeTextBox.Text = $"Welcome, {UserProfile.Name}!";
 
             Calc_kg_to_kcal();
         }
@@ -47,30 +70,37 @@ namespace ErnaehrungsTracker
         {
             double conversionFactor = 7716.179176;
 
-            double goalWeightKcal = Math.Round(goalWeight * conversionFactor);
-            double currentWeightKcal = Math.Round(currentWeight * conversionFactor);
+            double goalWeightKcal = Math.Round(UserProfile.GoalWeight * conversionFactor);
+            double currentWeightKcal = Math.Round(UserProfile.CurrentWeight * conversionFactor);
 
-            goalText.Text = $"{goalWeightKcal}";
-            //currentText.Text = $"{currentWeightKcal}";
+            TimeSpan timeSpan = UserProfile.StartDate - DateTime.Now;
+            int daysDifference = Math.Abs(timeSpan.Days);
 
-            foodText.Text = "";
-            trainingText.Text = "";
-            remainingText.Text = "";
+            double weightDifferenceKcal = Math.Abs(goalWeightKcal - currentWeightKcal);
 
+            double dailyCaloriesGoal = weightDifferenceKcal / daysDifference;
 
+            int totalFoodCalories = breakfastTotalCalories + lunchTotalCalories + dinnerTotalCalories + snacksTotalCalories;
+
+            int remainingCalories = (int)Math.Round(dailyCaloriesGoal - totalFoodCalories + trainingCalories);
+
+            goalText.Text = $"{(int)dailyCaloriesGoal}";
+            foodText.Text = $"{totalFoodCalories}";
+            trainingText.Text = $"{(int)trainingCalories}"; 
+            remainingText.Text = $"{remainingCalories}";
         }
 
 
-        #region WaterCounter & Steps
+       
 
-        private double waterCounter = 0; 
+
 
         private void addWater_Click(object sender, RoutedEventArgs e)
         {
-            if(double.TryParse(countWater.Text, out double waterToAdd))
+            if (double.TryParse(countWater.Text, out double waterToAdd))
             {
-                waterCounter += waterToAdd;
-                currentWater.Text = waterCounter.ToString("0.0");
+                WaterCounter.AddWater(waterToAdd);
+                currentWater.Text = WaterCounter.TotalWater.ToString("0.0");
             }
             else
             {
@@ -80,16 +110,16 @@ namespace ErnaehrungsTracker
 
         private void removeWater_Click(object sender, RoutedEventArgs e)
         {
-            if(double.TryParse(countWater.Text, out double waterToRemove))
+            if (double.TryParse(countWater.Text, out double waterToRemove))
             {
-                if(waterToRemove <= waterCounter)
+                try
                 {
-                    waterCounter -= waterToRemove;
-                    currentWater.Text = waterCounter.ToString("0.0");
+                    WaterCounter.RemoveWater(waterToRemove);
+                    currentWater.Text = WaterCounter.TotalWater.ToString("0.0");
                 }
-                else
+                catch (InvalidOperationException ex)
                 {
-                    MessageBox.Show("Die eingegebene Menge ist größer als die aktuelle Wassermenge.");
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -97,8 +127,20 @@ namespace ErnaehrungsTracker
                 MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Wassermenge ein.");
             }
         }
+        
+        
+        private double StepsToKilometers(double steps)
+        {
+            return steps;
+        }
 
-        private double stepsCounter = 0;
+        private double KilometersToCalories(double kilometers)
+        {
+            double caloriesPerKilometer = 7.0;
+
+            return kilometers * caloriesPerKilometer;
+        }
+
 
         private void addSteps_Click(object sender, RoutedEventArgs e)
         {
@@ -106,25 +148,36 @@ namespace ErnaehrungsTracker
             {
                 stepsCounter += stepsToAdd;
                 currentSteps.Text = stepsCounter.ToString("0.0");
+
+                double kilometers = StepsToKilometers(stepsToAdd);
+                double calories = KilometersToCalories(kilometers);
+
+                trainingCalories += calories;
+                trainingText.Text = trainingCalories.ToString("0.0");
+
+                Calc_kg_to_kcal();
             }
             else
             {
-                MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Wassermenge ein.");
+                MessageBox.Show("Bitte geben Sie eine gültige Zahl für die Schrittzahl ein.");
             }
         }
 
+
         private void removeSteps_Click(object sender, RoutedEventArgs e)
         {
-            if(double.TryParse(countSteps.Text, out double stepsToRemove))
+            if (double.TryParse(countSteps.Text, out double stepsToRemove))
             {
-                if(stepsToRemove <= stepsCounter)
+                try
                 {
-                    stepsCounter -= stepsToRemove;
-                    currentSteps.Text = stepsCounter.ToString("0.0");
+                    StepsCounter.RemoveSteps(stepsToRemove);
+                    currentSteps.Text = StepsCounter.TotalSteps.ToString("0.0");
+                    
+                    Calc_kg_to_kcal();
                 }
-                else
+                catch (InvalidOperationException ex)
                 {
-                    MessageBox.Show("Die eingegebene Menge ist größer als die aktuellen Schritte.");
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -134,17 +187,79 @@ namespace ErnaehrungsTracker
         }
 
 
-        #endregion
-
         private void openBreakfastMenu_Click(object sender, RoutedEventArgs e)
         {
             var openBreakfastScreen = new Breakfast();
             openBreakfastScreen.ShowDialog();
-            breakfastTotalCalories = openBreakfastScreen.GetTotalCalories();
-            ((MainWindow)Application.Current.MainWindow).BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+            breakfastTotalCalories += openBreakfastScreen.GetTotalCalories();
+            BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+            Calc_kg_to_kcal(); 
         }
 
+        private void ProfilButton_Click(object sender, RoutedEventArgs e)
+        {
+            Profil profilWindow = new Profil(UserProfile);
+            profilWindow.Show();
+            this.Close();
+        }
 
+        private void btnstart_Click(object sender, RoutedEventArgs e)
+        {
+            btnstart.Visibility = Visibility.Hidden;
+            isFirstRun = false;
+            startFirstScreen();
+        }
+
+        public void Load(string filename)
+        {
+            using (StreamReader file = new StreamReader(filename))
+            {
+                string line = file.ReadLine();
+                UserProfile = UserProfile.Deserialize(line);
+                MainWindow main = new MainWindow(UserProfile);
+                main.Show();
+                this.Close();
+            }
+        }
+
+        public void Save(string filename)
+        {
+            using (StreamWriter file = new StreamWriter(filename))
+            {
+                file.WriteLine(UserProfile.Serialize());
+            }
+        }
+
+      
+
+        private void openLunchMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var openLunchScreen = new Lunch();
+            openLunchScreen.ShowDialog();
+            lunchTotalCalories += openLunchScreen.GetTotalCalories();
+            LunchKcal.Text = $"{lunchTotalCalories} kcal";
+            Calc_kg_to_kcal(); 
+        }
+
+        private void openDinnerMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var openDinnerScreen = new Dinner();
+            openDinnerScreen.ShowDialog();
+            dinnerTotalCalories += openDinnerScreen.GetTotalCalories();
+            DinnerKcal.Text = $"{dinnerTotalCalories} kcal";
+            Calc_kg_to_kcal(); 
+        }
+        
+        
+        
+        private void OpenSnacksMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var OpenSnacksScreen = new Snacks();
+            OpenSnacksScreen.ShowDialog();
+            snacksTotalCalories += OpenSnacksScreen.GetTotalCalories();
+            SnacksKcal.Text = $"{snacksTotalCalories} kcal";
+            Calc_kg_to_kcal(); 
+        }
 
     }
 }

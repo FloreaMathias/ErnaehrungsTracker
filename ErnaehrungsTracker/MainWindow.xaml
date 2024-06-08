@@ -38,7 +38,7 @@
             <TextBlock Canvas.Left="78" TextWrapping="Wrap" Text="L" Canvas.Top="27" Foreground="#FFC300FF" FontWeight="DemiBold" FontSize="20"/>
             <TextBlock Canvas.Left="50" TextWrapping="Wrap" Text="Water" Canvas.Top="79" Foreground="#FFC300FF" FontSize="10"/>
             <Button x:Name="removeWater" Content="-" Width="20" Height="20" Canvas.Left="23" Canvas.Top="105" RenderTransformOrigin="1.04,0.517" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="15" Click="removeWater_Click"/>
-            <TextBox x:Name="countWater" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="110" Width="44" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="16"/>
+            <TextBox x:Name="countWater" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="110" Width="44" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="16" />
             <Button x:Name="addWater" Content="+" Width="20" Height="20" Canvas.Left="82" Canvas.Top="105" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="15" Click="addWater_Click"/>
         </Canvas>
 
@@ -48,7 +48,7 @@
             <TextBlock Canvas.Left="78" TextWrapping="Wrap" Text="km" Canvas.Top="27" Foreground="#FFC300FF" FontWeight="DemiBold" FontSize="20"/>
             <TextBlock Canvas.Left="52" TextWrapping="Wrap" Text="Steps" Canvas.Top="79" Foreground="#FFC300FF" FontSize="10"/>
             <Button x:Name="removeSteps" Content="-" Width="20" Height="20" Canvas.Left="23" Canvas.Top="105" RenderTransformOrigin="1.04,0.517" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="15" Click="removeSteps_Click"/>
-            <TextBox x:Name="countSteps" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="110" Width="44" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="16"/>
+            <TextBox x:Name="countSteps" Canvas.Left="40" TextWrapping="Wrap" Text="" Canvas.Top="110" Width="44" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="16" />
             <Button x:Name="addSteps" Content="+" Width="20" Height="20" Canvas.Left="82" Canvas.Top="105" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="15" Click="addSteps_Click"/>
         </Canvas>
 
@@ -61,34 +61,35 @@
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="220">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Lunch" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
-            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
+            <TextBlock x:Name="LunchKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="openLunchMenu_Click"/>
         </Canvas>
 
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="260">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Dinner" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
-            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
+            <TextBlock x:Name="DinnerKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="openDinnerMenu_Click"/>
         </Canvas>
 
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="300">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Snacks" Canvas.Top="3" Foreground="White" FontSize="12"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
-            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF"/>
+            <TextBlock x:Name="SnacksKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
+            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="OpenSnacksMenu_Click"/>
         </Canvas>
 
         <Canvas Width="122" Height="154" Background="#FF404040" Canvas.Left="655" Canvas.Top="181">
             <!--Kleiner Grafik -->
         </Canvas>
-    <!--
-         <Button Content="" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}">
-            <Button.Background>
-                <ImageBrush ImageSource="/profile.png"/>
-            </Button.Background>
-        </Button>
-    -->
+
+        <Button x:Name="ProfilButton" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click"/>
+
+        <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/>
+
+
     </Canvas>
 
 </Window>
+
+
