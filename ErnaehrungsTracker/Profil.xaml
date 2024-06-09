@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="Profil" Height="430" Width="550">
+        Title="Profil" Height="430" Width="550"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="RoundedButton" TargetType="Button">
             <Setter Property="Template">

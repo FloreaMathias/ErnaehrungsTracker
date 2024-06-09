@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="FirstScreen" Height="400" Width="800">
+        Title="FirstScreen" Height="400" Width="800"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
     <Grid Background="#272727" Width="800" Height="400" HorizontalAlignment="Center" VerticalAlignment="Center">
     <Grid.RowDefinitions>
         <RowDefinition Height="Auto"/>

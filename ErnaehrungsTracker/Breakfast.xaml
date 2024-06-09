@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="Breakfast" Height="324" Width="500">
+        Title="Breakfast" Height="324" Width="500"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        >
  <Window.Resources>
         <Style x:Key="RoundedButton" TargetType="Button">
             <Setter Property="Template">
