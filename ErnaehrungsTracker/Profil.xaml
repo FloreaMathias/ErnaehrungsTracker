@@ -5,9 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="Profil" Height="400" Width="550">
+        Title="Profil" Height="430" Width="550">
     <Window.Resources>
         <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF404040"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFC300FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="NoHoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontSize" Value="15"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
@@ -21,20 +56,20 @@
     </Window.Resources>
     <Canvas Background="#272727">
 
-        <Label Content="Weight:" Canvas.Left="53" Canvas.Top="33" Foreground="#FFC300FF" Height="46" Width="96" FontSize="22" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Goal Weight:" Canvas.Left="53" Canvas.Top="127" Foreground="#FFC300FF" Height="34" Width="168" FontSize="15" FontWeight="Bold"/>
+        <Label Content="Weight:" Canvas.Left="38" Canvas.Top="24" Foreground="#FFC300FF" Height="46" Width="96" FontSize="22" FontWeight="Bold"/>
+        <Label Content="Goal Weight:" Canvas.Left="85" Canvas.Top="142" Foreground="#FFC300FF" Height="29" Width="102" FontSize="12" FontWeight="Bold"/>
         <Label Content="Date:" Canvas.Left="48" Canvas.Top="170" Foreground="#FFC300FF" Height="46" Width="66" FontSize="22" FontWeight="Bold"/>
 
-        <Button x:Name="ProfilLoadButton" Content="Load" Canvas.Left="449" Canvas.Top="130" Height="30" Width="60" Click="ProfilLoadButton_Click" Style="{StaticResource RoundedButton}" Background="#FFC300FF" Foreground="White"/>
-        <Button x:Name="ProfilSaveButton" Content="Save" Canvas.Left="449" Canvas.Top="171" Height="30" Width="60" Click="ProfilSaveButton_Click" Style="{StaticResource RoundedButton}" Background="#FFC300FF" Foreground="White"/>
-        <Button x:Name="BackButton" Content="x" Canvas.Left="491" Canvas.Top="13" Height="18" Width="18" Click="BackButton_Click" Style="{StaticResource RoundedButton}" Background="#FFC300FF" Foreground="White" FontSize="8" RenderTransformOrigin="0.037,0.599"/>
+        <Button x:Name="ProfilLoadButton" Content="Load" Canvas.Left="449" Canvas.Top="130" Height="30" Width="60" Click="ProfilLoadButton_Click" Style="{StaticResource HoverButtonStyle}" Cursor="Hand" Background="#FFC300FF" Foreground="White"/>
+        <Button x:Name="ProfilSaveButton" Content="Save" Canvas.Left="449" Canvas.Top="171" Height="30" Width="60" Click="ProfilSaveButton_Click" Style="{StaticResource HoverButtonStyle}" Cursor="Hand" Background="#FFC300FF" Foreground="White"/>
+        <Button x:Name="BackButton" Content="x" Canvas.Left="484" Canvas.Top="13" Height="25" Width="25" Click="BackButton_Click" Style="{StaticResource HoverButtonStyle}" Cursor="Hand" Background="#FFC300FF" Foreground="White" FontSize="12.5" RenderTransformOrigin="0.037,0.599" />
 
-        
-        
-        <Button x:Name="RemoveWeightButton" Content="-" Width="31" Height="31" Canvas.Left="32" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="RemoveWeightButton_Click" />
-        <TextBox x:Name="ProfilWeightTextBoxINPUT" Canvas.Left="68" TextWrapping="Wrap" Text="" Canvas.Top="79" Width="66" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" />
-        <Button x:Name="AddWeightButton" Content="+" Width="31" Height="31" Canvas.Left="139" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="AddWeightButton_Click" />
-        <TextBlock x:Name="kgremain" Canvas.Left="187" TextWrapping="Wrap" Text="00" Canvas.Top="83" Foreground="White" FontWeight="Normal" FontSize="15" RenderTransformOrigin="2.35,0.546">
+
+
+        <Button x:Name="RemoveWeightButton" Content="-" Width="31" Height="31" Canvas.Left="32" Canvas.Top="56" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="RemoveWeightButton_Click" Style="{StaticResource HoverButtonStyle}" Cursor="Hand"/>
+        <TextBox x:Name="ProfilWeightTextBoxINPUT" Canvas.Left="68" TextWrapping="Wrap" Text="" Canvas.Top="64" Width="66" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="21" IsReadOnly="True" TextAlignment="Center" />
+        <Button x:Name="AddWeightButton" Content="+" Width="31" Height="31" Canvas.Left="139" Canvas.Top="56" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="AddWeightButton_Click" Style="{StaticResource HoverButtonStyle}" Cursor="Hand"/>
+        <TextBlock x:Name="kgremain" Canvas.Left="187" TextWrapping="Wrap" Text="00" Canvas.Top="65" Foreground="White" FontWeight="Normal" FontSize="15" RenderTransformOrigin="2.35,0.546">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -49,18 +84,22 @@
         <Label Content="-" Canvas.Left="136" Canvas.Top="196" Foreground="White" FontSize="15"/>
         <Label x:Name="GoalDate" Content="dd.mm.yyyy" Canvas.Left="150" Canvas.Top="196" Foreground="White" FontSize="15"/>
 
-        <Canvas Width="468" Height="138" Canvas.Left="48" Canvas.Top="225" Background="#404040"/>
-        <TextBlock x:Name="StartWeighttextBox" Canvas.Left="163" TextWrapping="Wrap" Text="00" Canvas.Top="115" Foreground="White"/>
-        <TextBlock x:Name="GoalWeightTextBox" Canvas.Left="163" TextWrapping="Wrap" Text="00" Canvas.Top="136" Foreground="White"/>
-        <TextBlock x:Name="CurrentextBox" Canvas.Left="163" TextWrapping="Wrap" Text="00" Canvas.Top="155" Foreground="White"/>
+        <Canvas x:Name="Statistic" Width="468" Height="138" Canvas.Left="48" Canvas.Top="225" Background="#404040">
+            <TextBlock Name="GoalTextLabel" Canvas.Right="10" Canvas.Top="10" Text="Goal" Foreground="White"/>
+            <TextBlock Name="KmTextLabel" Canvas.Right="10" Canvas.Top="60" Text="Km"  Foreground="White"/>
+            <TextBlock Name="LTextLabel" Canvas.Right="10" Canvas.Top="110" Text="L"  Foreground="White"/>
+        </Canvas>
+        <TextBlock x:Name="StartWeighttextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="107" Foreground="White"/>
+        <TextBlock x:Name="GoalWeightTextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="147" Foreground="White"/>
+        <TextBlock x:Name="CurrentextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="127" Foreground="White"/>
 
 
-        <Label x:Name="ProfileName" Canvas.Left="234" Content="" Canvas.Top="10" Width="96" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31"/>
-        <Label Content="Current Weight:" Canvas.Left="32" Canvas.Top="147.5" Foreground="#FFC300FF" Height="36" Width="124" FontSize="15" FontWeight="Bold"/>
-        <Label Content="Start Weight:" Canvas.Left="32" Canvas.Top="105" Foreground="#FFC300FF" Height="36" Width="124" FontSize="15" FontWeight="Bold"/>
+        <Label x:Name="ProfileName" Canvas.Left="234" Content="Name" Canvas.Top="10" Width="96" Background="#FF404040" Foreground="White"  BorderBrush="{x:Null}" Height="31" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content="Current Weight:" Canvas.Left="68" Canvas.Top="122" Foreground="#FFC300FF" Height="26" Width="108" FontSize="12" FontWeight="Bold"/>
+        <Label Content="Start Weight:" Canvas.Left="84" Canvas.Top="102" Foreground="#FFC300FF" Height="27" Width="86" FontSize="12" FontWeight="Bold"/>
 
-        
-        <Rectangle Height="28" Canvas.Left="175" Stroke="white" Canvas.Top="81" Width="2" RenderTransformOrigin="0.5,0.5">
+
+        <Rectangle Height="28" Canvas.Left="175" Stroke="white" Canvas.Top="63" Width="2" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="1"/>
@@ -70,6 +109,6 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        
+
     </Canvas>
 </Window>

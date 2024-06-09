@@ -21,10 +21,12 @@ namespace ErnaehrungsTracker
 
     // nicht erlauben von fenster vergrößern/verkleiner
     // logging
+    // kcal zentrieren water/km
+    
+    
     // wenn essen hinzugefügt dann wieder remove, dann wird die kcal nicht mit removed
     //  fenster close 
     // Name absichern eingabe firstscreen
-    // kcal zentrieren water/km
     
     
         public MainWindow()

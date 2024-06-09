@@ -5,20 +5,55 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="Lunch" Height="300" Width="500">
+        Title="Lunch" Height="324" Width="500">
+ <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="NoHoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{x:Null}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
     <Canvas Background="#252525" Margin="0,0,0,-29">
-        <Button x:Name="AddButton" Content="Add" Canvas.Left="26" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddButton_Click"/>
-        <Button x:Name="RemoveButton" Content="Remove" Canvas.Left="128" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="RemoveButtonClick"/>
+        <Button x:Name="AddButton" Content="Add" Canvas.Left="26" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="AddButton_Click" Foreground="Black" Background="White"/>
+        <Button x:Name="RemoveButton" Content="Remove" Canvas.Left="128" Canvas.Top="252" Height="22" Width="80" HorizontalAlignment="Left" VerticalAlignment="Center" Click="RemoveButtonClick" Foreground="Black" Background="White"/>
 
         <ComboBox x:Name="OurMelasComboBox" Canvas.Left="26" Canvas.Top="91" Width="120"/>
-        <Label Content="Lunch Meal:" Canvas.Left="26" Canvas.Top="10" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+        <Label Content="Lunch:" Canvas.Left="26" Canvas.Top="15" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
         <Label Content="Our Meals:" Canvas.Left="26" Canvas.Top="60" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Others:" Canvas.Left="213" Canvas.Top="60" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
         <Label Content="Meal:" Canvas.Left="213" Canvas.Top="87" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White"/>
         <Label Content="Kcal:" Canvas.Left="338" Canvas.Top="87" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="White"/>
-        <TextBox x:Name="OtherMealTextBox" Canvas.Left="252" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White" />
-        <TextBox x:Name="OtherKclaTexBox" Canvas.Left="372" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#808080" Foreground="White"/>
-        <ListBox x:Name="ListBox" Height="100" Width="312" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="142"/>
-        <Button x:Name="ExitButton" Content="Exit" Canvas.Left="232" Canvas.Top="252" Height="22" Width="80" Click="ExitButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox x:Name="OtherMealTextBox" Canvas.Left="252" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#404040" Foreground="White" />
+        <TextBox x:Name="OtherKclaTexBox" Canvas.Left="372" TextWrapping="Wrap" Text="" Canvas.Top="91" Width="86" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#404040" Foreground="White"/>
+        <ListBox x:Name="ListBox" Height="100" Width="312" HorizontalAlignment="Center" VerticalAlignment="Top" Canvas.Left="26" Canvas.Top="142" Background="#404040" Foreground="White"/>
+        <Button x:Name="ExitButton" Content="Exit" Canvas.Left="232" Canvas.Top="252" Height="22" Width="80" Click="ExitButton_Click" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Black" Background="White"/>
     </Canvas>
 </Window>
