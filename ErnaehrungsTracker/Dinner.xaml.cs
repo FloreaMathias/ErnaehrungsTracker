@@ -79,6 +79,7 @@ namespace ErnaehrungsTracker
                 }
                 else
                 {
+                    LoggerClass.logger.Error("Bitte wählen Sie entweder eine Mahlzeit aus der Liste oder geben Sie den Namen und die Kalorien einer eigenen Mahlzeit ein.", "AddButtonClick");
                     MessageBox.Show("Bitte wählen Sie entweder eine Mahlzeit aus der Liste oder geben Sie den Namen und die Kalorien einer eigenen Mahlzeit ein.");
                 }
             }
@@ -107,6 +108,8 @@ namespace ErnaehrungsTracker
             else
             {
                 MessageBox.Show("Bitte wählen Sie eine Mahlzeit zum Entfernen aus der Liste aus.");
+                LoggerClass.logger.Error("Bitte wählen Sie eine Mahlzeit zum Entfernen aus der Liste aus.", "RemoveButtonClick");
+                    
             }
         }
 
@@ -122,6 +125,10 @@ namespace ErnaehrungsTracker
                 mainWindow.DinnerKcal.Text = $"{totalCalories} kcal";
         
                 mainWindow.Calc_kg_to_kcal();
+            }
+            else
+            {
+                LoggerClass.logger.Error("Das Hauptfenster konnte nicht gefunden werden.", "UpdateCalories");
             }
         }
         public int GetTotalCalories()
