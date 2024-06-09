@@ -6,52 +6,39 @@ namespace ErnaehrungsTracker.Models
     {
         public string Name { get; set; }
         public double CurrentWeight { get; set; }
-        public double StartWeight { get; set; }
         public double GoalWeight { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime GoalDate { get; set; }
+        public double StartWeight { get; set; }
 
-
-        public UserProfile(string name , double currentWeight, double goalWeight, DateTime startDate, DateTime goalDate)
+        public UserProfile(string name, double currentWeight, double goalWeight, DateTime startDate, DateTime goalDate)
         {
             Name = name;
-            StartWeight = currentWeight;
             CurrentWeight = currentWeight;
             GoalWeight = goalWeight;
             StartDate = startDate;
             GoalDate = goalDate;
-
+            StartWeight = currentWeight; 
         }
 
         public string Serialize()
         {
-            return $"{Name};{StartWeight};{CurrentWeight};{GoalWeight};{StartDate:O};{GoalDate:0}";
+            return $"{Name},{CurrentWeight},{GoalWeight},{StartDate:o},{GoalDate:o},{StartWeight}";
         }
 
-        public static UserProfile Deserialize(string serialized)
+        public static UserProfile Deserialize(string data)
         {
-            string[] parts = serialized.Split(';');
-            if (parts.Length == 6)
+            var parts = data.Split(',');
+            return new UserProfile(
+                parts[0],
+                double.Parse(parts[1]),
+                double.Parse(parts[2]),
+                DateTime.Parse(parts[3]),
+                DateTime.Parse(parts[4])
+            )
             {
-                string name = parts[0];
-                double startWeight = double.Parse(parts[1]);
-                double currentWeight = double.Parse(parts[2]);
-                double goalWeight = double.Parse(parts[3]);
-                DateTime startDate = DateTime.Parse(parts[4]);
-                DateTime goalDate = DateTime.Parse(parts[5]);
-
-                return new UserProfile(name, currentWeight, goalWeight, startDate, goalDate);
-            }
-            else
-            {
-                throw new Exception("Die Datei hat ein ungültiges Format.");
-            }
-        }
-        public double CalculateAverageDailyWeightLoss()
-        {
-            TimeSpan timeSpan = DateTime.Now - StartDate;
-            int daysPassed = timeSpan.Days > 0 ? timeSpan.Days : 1; 
-            return (StartWeight - CurrentWeight) / daysPassed;
+                StartWeight = double.Parse(parts[5])
+            };
         }
     }
 }

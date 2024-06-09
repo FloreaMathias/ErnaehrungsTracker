@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
-        Title="Profil" Height="430" Width="550"
+        Title="Profil" Height="300" Width="550"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
@@ -86,15 +86,18 @@
         <Label Content="-" Canvas.Left="136" Canvas.Top="196" Foreground="White" FontSize="15"/>
         <Label x:Name="GoalDate" Content="dd.mm.yyyy" Canvas.Left="150" Canvas.Top="196" Foreground="White" FontSize="15"/>
 
-        <Canvas x:Name="Statistic" Width="468" Height="138" Canvas.Left="48" Canvas.Top="225" Background="#404040">
+        <!-- 
+<Canvas x:Name="Statistic" Width="468" Height="138" Canvas.Left="48" Canvas.Top="225" Background="#404040">
+            <Rectangle x:Name="Klc" Height="7" Width="420" HorizontalAlignment="Left" Canvas.Top="17" VerticalAlignment="Top" Canvas.Left="10" Fill="Green"></Rectangle>
+            <Rectangle x:Name="KM" Height="7" Width="420" HorizontalAlignment="Left" Canvas.Top="64" VerticalAlignment="Top" Canvas.Left="10" Fill="Orange"></Rectangle>
+            <Rectangle x:Name="L" Height="7" Width="420" HorizontalAlignment="Left" Canvas.Top="116" VerticalAlignment="Top" Canvas.Left="10" Fill="Blue"></Rectangle>
             <TextBlock Name="GoalTextLabel" Canvas.Right="10" Canvas.Top="10" Text="Goal" Foreground="White"/>
-            <TextBlock Name="KmTextLabel" Canvas.Right="10" Canvas.Top="60" Text="Km"  Foreground="White"/>
-            <TextBlock Name="LTextLabel" Canvas.Right="10" Canvas.Top="110" Text="L"  Foreground="White"/>
-        </Canvas>
+            <TextBlock Name="KmTextLabel" Canvas.Right="10" Canvas.Top="60" Text="Km" Foreground="White" />
+            <TextBlock Name="LTextLabel" Canvas.Right="10" Canvas.Top="110" Text="L" Foreground="White"/>
+        </Canvas>-->
         <TextBlock x:Name="StartWeighttextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="107" Foreground="White"/>
         <TextBlock x:Name="GoalWeightTextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="147" Foreground="White"/>
         <TextBlock x:Name="CurrentextBox" Canvas.Left="170" TextWrapping="Wrap" Text="00" Canvas.Top="127" Foreground="White"/>
-
 
         <Label x:Name="ProfileName" Canvas.Left="234" Content="Name" Canvas.Top="10" Width="96" Background="#FF404040" Foreground="White"  BorderBrush="{x:Null}" Height="31" HorizontalAlignment="Center" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label Content="Current Weight:" Canvas.Left="68" Canvas.Top="122" Foreground="#FFC300FF" Height="26" Width="108" FontSize="12" FontWeight="Bold"/>

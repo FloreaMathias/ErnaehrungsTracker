@@ -141,8 +141,8 @@
 
         <Button x:Name="ProfilButton" Content="Profile" Canvas.Left="702" Canvas.Top="57" Height="30" Width="55" BorderBrush="#202020"  Style="{StaticResource RoundedButton}" BorderThickness="1"  Click="ProfilButton_Click" Background="#FF404040" Foreground="White" Cursor="Hand"/>
 
+        <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/> 
 
-    <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/> 
 
     </Canvas>
 </Window>

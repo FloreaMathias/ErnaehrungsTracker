@@ -11,6 +11,10 @@ namespace ErnaehrungsTracker
         public WaterCounter WaterCounter { get; private set; } = new WaterCounter();
         public StepsCounter StepsCounter { get; private set; } = new StepsCounter();
         
+        private CalorieCalculator calorieCalculator = new CalorieCalculator();
+        public double foodtext;
+        
+        
         public int breakfastTotalCalories = 0;
         public int lunchTotalCalories = 0;
         public int dinnerTotalCalories = 0;
@@ -18,6 +22,7 @@ namespace ErnaehrungsTracker
         private double stepsCounter = 0;
         private double trainingCalories = 0;
         private static bool isFirstRun = true;
+
         
     
         public MainWindow()
@@ -52,6 +57,7 @@ namespace ErnaehrungsTracker
                 LunchKcal.Text = $"{lunchTotalCalories} kcal";  
                 DinnerKcal.Text = $"{dinnerTotalCalories} kcal";  
                 SnacksKcal.Text = $"{snacksTotalCalories} kcal";  
+          
             }
         }
 
@@ -69,28 +75,17 @@ namespace ErnaehrungsTracker
 
         public void Calc_kg_to_kcal()
         {
-            double conversionFactor = 7716.179176;
+            calorieCalculator.UpdateTotalFoodCalories(breakfastTotalCalories, lunchTotalCalories, dinnerTotalCalories, snacksTotalCalories);
 
-            double goalWeightKcal = Math.Round(UserProfile.GoalWeight * conversionFactor);
-            double currentWeightKcal = Math.Round(UserProfile.CurrentWeight * conversionFactor);
-
-            TimeSpan timeSpan = UserProfile.StartDate - DateTime.Now;
-            int daysDifference = Math.Abs(timeSpan.Days);
-
-            double weightDifferenceKcal = Math.Abs(goalWeightKcal - currentWeightKcal);
-
-            double dailyCaloriesGoal = weightDifferenceKcal / daysDifference;
-
-            int totalFoodCalories = breakfastTotalCalories + lunchTotalCalories + dinnerTotalCalories + snacksTotalCalories;
-
-            int remainingCalories = (int)Math.Round(dailyCaloriesGoal - totalFoodCalories + trainingCalories);
-
+            double dailyCaloriesGoal = calorieCalculator.CalculateDailyCaloriesGoal(UserProfile);
+            int remainingCalories = calorieCalculator.CalculateRemainingCalories(dailyCaloriesGoal, trainingCalories);
+            foodtext = calorieCalculator.UpdateTotalFoodCalories(breakfastTotalCalories, lunchTotalCalories, dinnerTotalCalories, snacksTotalCalories);
             goalText.Text = $"{(int)dailyCaloriesGoal}";
-            foodText.Text = $"{totalFoodCalories}";
-            trainingText.Text = $"{(int)trainingCalories}"; 
+            foodText.Text = $"{foodtext}";
+            trainingText.Text = $"{(int)trainingCalories}";
             remainingText.Text = $"{remainingCalories}";
-            
-            UpdateBars(totalFoodCalories, trainingCalories);
+
+            UpdateBars(calorieCalculator.TotalFoodCalories, trainingCalories);
         }
 
         private void UpdateBars(double mealCalories, double trainingCalories)
@@ -206,14 +201,46 @@ namespace ErnaehrungsTracker
         }
 
 
-     
+        private int savedBreakfastTotalCalories;
+        private int savedLunchTotalCalories;
+        private int savedDinnerTotalCalories;
+        private int savedSnacksTotalCalories;
         private void ProfilButton_Click(object sender, RoutedEventArgs e)
         {
-            Profil profilWindow = new Profil(UserProfile);
+            // Speichern der aktuellen Werte
+            int savedBreakfastTotalCalories = breakfastTotalCalories;
+            int savedLunchTotalCalories = lunchTotalCalories;
+            int savedDinnerTotalCalories = dinnerTotalCalories;
+            int savedSnacksTotalCalories = snacksTotalCalories;
+
+            Profil profilWindow = new Profil(UserProfile, savedBreakfastTotalCalories, savedLunchTotalCalories, savedDinnerTotalCalories, savedSnacksTotalCalories);
+            profilWindow.Closed += ProfilWindow_Closed; 
             profilWindow.Show();
-            this.Close();
+            this.Hide(); 
         }
 
+        private void ProfilWindow_Closed(object sender, EventArgs e)
+        {
+            this.Show(); 
+
+            Profil profilWindow = sender as Profil;
+            if (profilWindow != null)
+            {
+                breakfastTotalCalories = profilWindow.BreakfastTotalCalories;
+                lunchTotalCalories = profilWindow.LunchTotalCalories;
+                dinnerTotalCalories = profilWindow.DinnerTotalCalories;
+                snacksTotalCalories = profilWindow.SnacksTotalCalories;
+
+                BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+                LunchKcal.Text = $"{lunchTotalCalories} kcal";
+                DinnerKcal.Text = $"{dinnerTotalCalories} kcal";
+                SnacksKcal.Text = $"{snacksTotalCalories} kcal";
+
+                Calc_kg_to_kcal();
+            }
+        }
+
+        
         private void btnstart_Click(object sender, RoutedEventArgs e)
         {
             btnstart.Visibility = Visibility.Hidden;
@@ -227,9 +254,7 @@ namespace ErnaehrungsTracker
             {
                 string line = file.ReadLine();
                 UserProfile = UserProfile.Deserialize(line);
-                MainWindow main = new MainWindow(UserProfile);
-                main.Show();
-                this.Close();
+                SetupUI();
             }
         }
 
