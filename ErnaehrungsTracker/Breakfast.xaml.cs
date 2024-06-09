@@ -100,6 +100,8 @@ namespace ErnaehrungsTracker
                 ListBox.Items.Remove(selectedEntry);
                 savedEntries.Remove(selectedEntry);
                 SaveEntriesToFile();
+        
+                UpdateCalories();
             }
             else
             {
@@ -107,6 +109,29 @@ namespace ErnaehrungsTracker
             }
         }
 
+        private void UpdateCalories()
+        {
+            int totalCalories = GetTotalCalories();
+    
+            MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
+    
+            if (mainWindow != null)
+            {
+                mainWindow.breakfastTotalCalories = totalCalories;
+                mainWindow.BreakFastKcal.Text = $"{totalCalories} kcal";
+        
+                mainWindow.Calc_kg_to_kcal();
+            }
+        }
+        public int GetTotalCalories()
+        {
+            int totalCalories = 0;
+            foreach (int kcal in mealCalories)
+            {
+                totalCalories += kcal;
+            }
+            return totalCalories;
+        }
         private void LoadSavedEntries()
         {
             if (File.Exists(savedEntriesFilePath))
@@ -129,16 +154,7 @@ namespace ErnaehrungsTracker
             this.Close();
         }
 
-        public int GetTotalCalories()
-        {
-            int totalCalories = 0;
-            foreach (int kcal in mealCalories)
-            {
-                totalCalories += kcal;
-            }
-            return totalCalories;
-        }
-
+     
         private void OurMelasComboBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             if (OurMelasComboBox.SelectedItem != null)

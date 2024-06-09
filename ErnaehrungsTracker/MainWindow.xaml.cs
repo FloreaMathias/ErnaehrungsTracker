@@ -11,23 +11,14 @@ namespace ErnaehrungsTracker
         public WaterCounter WaterCounter { get; private set; } = new WaterCounter();
         public StepsCounter StepsCounter { get; private set; } = new StepsCounter();
         
-        private static int breakfastTotalCalories = 0;
-        private static int lunchTotalCalories = 0;
-        private static int dinnerTotalCalories = 0;
-        private static int snacksTotalCalories = 0;
+        public int breakfastTotalCalories = 0;
+        public int lunchTotalCalories = 0;
+        public int dinnerTotalCalories = 0;
+        public int snacksTotalCalories = 0;
         private double stepsCounter = 0;
         private double trainingCalories = 0;
         private static bool isFirstRun = true;
-
-    // nicht erlauben von fenster vergrößern/verkleiner
-    // logging
-    // kcal zentrieren water/km
-    
-    
-    // wenn essen hinzugefügt dann wieder remove, dann wird die kcal nicht mit removed
-    //  fenster close 
-    // Name absichern eingabe firstscreen
-    
+        
     
         public MainWindow()
         {
