@@ -60,7 +60,7 @@ namespace ErnaehrungsTracker
             var startScreen = new FirstScreen();
             startScreen.ShowDialog();
 
-            UserProfile = new UserProfile(startScreen.inputName, startScreen.startWeight, startScreen.currentWeight, startScreen.goalWeight, startScreen.startDate, startScreen.goalDate);
+            UserProfile = new UserProfile(startScreen.inputName, startScreen.currentWeight, startScreen.goalWeight, startScreen.startDate, startScreen.goalDate);
             welcomeTextBox.Text = $"Welcome, {UserProfile.Name}!";
 
             Calc_kg_to_kcal();
@@ -88,9 +88,21 @@ namespace ErnaehrungsTracker
             foodText.Text = $"{totalFoodCalories}";
             trainingText.Text = $"{(int)trainingCalories}"; 
             remainingText.Text = $"{remainingCalories}";
+            
+            UpdateBars(totalFoodCalories, trainingCalories);
         }
 
-
+        private void UpdateBars(double mealCalories, double trainingCalories)
+        {
+            double maxHeight = 100.0;
+    
+            double maxCalories = Math.Max(mealCalories, trainingCalories);
+            double mealHeight = (mealCalories / maxCalories) * maxHeight;
+            double trainingHeight = (trainingCalories / maxCalories) * maxHeight;
+    
+            MealsBar.Height = mealHeight;
+            TrainingBar.Height = trainingHeight;
+        }
        
 
 
@@ -144,10 +156,10 @@ namespace ErnaehrungsTracker
 
         private void addSteps_Click(object sender, RoutedEventArgs e)
         {
-            if(double.TryParse(countSteps.Text, out double stepsToAdd))
+            if (double.TryParse(countSteps.Text, out double stepsToAdd))
             {
-                stepsCounter += stepsToAdd;
-                currentSteps.Text = stepsCounter.ToString("0.0");
+                StepsCounter.AddSteps(stepsToAdd);
+                currentSteps.Text = StepsCounter.TotalSteps.ToString("0.0");
 
                 double kilometers = StepsToKilometers(stepsToAdd);
                 double calories = KilometersToCalories(kilometers);
@@ -172,7 +184,13 @@ namespace ErnaehrungsTracker
                 {
                     StepsCounter.RemoveSteps(stepsToRemove);
                     currentSteps.Text = StepsCounter.TotalSteps.ToString("0.0");
-                    
+
+                    double kilometers = StepsToKilometers(stepsToRemove);
+                    double calories = KilometersToCalories(kilometers);
+
+                    trainingCalories -= calories;
+                    trainingText.Text = trainingCalories.ToString("0.0");
+
                     Calc_kg_to_kcal();
                 }
                 catch (InvalidOperationException ex)

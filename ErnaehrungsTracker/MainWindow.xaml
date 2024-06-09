@@ -6,7 +6,19 @@
         xmlns:local="clr-namespace:ErnaehrungsTracker"
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="800">
-
+    <Window.Resources>
+        <Style x:Key="RoundedButton" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Canvas Background="#272727">
         <TextBlock x:Name="welcomeTextBox" Canvas.Left="43" TextWrapping="Wrap" Text="Welcome, {name}!" Canvas.Top="114" Foreground="White" FontWeight="Bold" FontSize="40" FontFamily="Arial" Margin="0,0,0,0" Height="52" />
         <Canvas Width="372" Height="54" Canvas.Left="43" Canvas.Top="40">
@@ -56,7 +68,19 @@
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
             <TextBlock Canvas.Left="9" TextWrapping="Wrap" Text="Breakfast" Canvas.Top="3" Foreground="White" FontSize="12"/>
             <TextBlock x:Name="BreakFastKcal" Canvas.Left="10" TextWrapping="Wrap" Text="00 kcal" Canvas.Top="17" Foreground="White" FontSize="8"/>
-            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="openBreakfastMenu_Click"/>
+            <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="openBreakfastMenu_Click">
+         
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Green"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Red"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
         </Canvas>
         <Canvas Width="225" Height="30" Canvas.Left="386" Canvas.Top="220">
             <Border BorderBrush="#FFC300FF" BorderThickness="1" Height="30" Width="225" CornerRadius="8"/>
@@ -79,17 +103,18 @@
             <Button Content="+" Width="30" Height="30" Canvas.Left="185" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FFC300FF" Click="OpenSnacksMenu_Click"/>
         </Canvas>
 
-        <Canvas Width="122" Height="154" Background="#FF404040" Canvas.Left="655" Canvas.Top="181">
-            <!--Kleiner Grafik -->
+        <Canvas Width="120" Height="154" Background="#FF404040" Canvas.Left="647" Canvas.Top="181">
+            <Rectangle x:Name="TrainingBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="30" Canvas.Bottom="20"/>
+            <TextBlock Canvas.Left="64" TextWrapping="Wrap" Text="Training"  Foreground="White" FontWeight="Bold" FontSize="8" FontFamily="Arial" Height="17" Width="32" RenderTransformOrigin="1.136,8.585" Canvas.Top="139" />
+            <Rectangle x:Name="MealsBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="70" Canvas.Bottom="20"/>
+            <TextBlock Canvas.Left="30" TextWrapping="Wrap" Text="Food"  Foreground="White" FontWeight="Bold" FontSize="8" FontFamily="Arial" Height="17" Width="20" RenderTransformOrigin="1.136,8.585" Canvas.Top="139" />
         </Canvas>
+        <Rectangle Height="1" Canvas.Left="657" Stroke="Gray" Canvas.Top="315" Width="100"/>
 
-        <Button x:Name="ProfilButton" Canvas.Left="694" Canvas.Top="42" Height="40" Width="44" BorderBrush="{x:Null}" Click="ProfilButton_Click"/>
 
-        <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/>
+        <Button x:Name="ProfilButton" Content="Profile" Canvas.Left="702" Canvas.Top="57" Height="30" Width="55" BorderBrush="#202020"  Style="{StaticResource RoundedButton}" BorderThickness="1"  Click="ProfilButton_Click" Background="White"/>
 
+        <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/> 
 
     </Canvas>
-
 </Window>
-
-

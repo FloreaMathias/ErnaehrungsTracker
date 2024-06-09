@@ -11,7 +11,7 @@
 
         public void RemoveSteps(double amount)
         {
-            if (amount <= TotalSteps)
+            if (TotalSteps >= amount)
             {
                 TotalSteps -= amount;
             }

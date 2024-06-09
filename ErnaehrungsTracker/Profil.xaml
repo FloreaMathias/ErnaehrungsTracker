@@ -29,6 +29,8 @@
         <Button x:Name="ProfilSaveButton" Content="Save" Canvas.Left="449" Canvas.Top="171" Height="30" Width="60" Click="ProfilSaveButton_Click" Style="{StaticResource RoundedButton}" Background="#FFC300FF" Foreground="White"/>
         <Button x:Name="BackButton" Content="x" Canvas.Left="491" Canvas.Top="13" Height="18" Width="18" Click="BackButton_Click" Style="{StaticResource RoundedButton}" Background="#FFC300FF" Foreground="White" FontSize="8" RenderTransformOrigin="0.037,0.599"/>
 
+        
+        
         <Button x:Name="RemoveWeightButton" Content="-" Width="31" Height="31" Canvas.Left="32" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="RemoveWeightButton_Click" />
         <TextBox x:Name="ProfilWeightTextBoxINPUT" Canvas.Left="68" TextWrapping="Wrap" Text="" Canvas.Top="79" Width="66" Background="#FF404040" Foreground="White" BorderBrush="{x:Null}" Height="31" IsReadOnly="True" VerticalAlignment="Center" HorizontalAlignment="Center" />
         <Button x:Name="AddWeightButton" Content="+" Width="31" Height="31" Canvas.Left="139" Canvas.Top="74" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" FontSize="22" Click="AddWeightButton_Click" />

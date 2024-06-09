@@ -22,7 +22,7 @@ namespace ErnaehrungsTracker
             CurrentextBox.Text = UserProfile.CurrentWeight.ToString();
             GoalWeightTextBox.Text = UserProfile.GoalWeight.ToString();
             ProfileName.Content = UserProfile.Name;
-            StartWeighttextBox.Text = UserProfile.CurrentWeight.ToString(); //wenn man weight added sött des nd +1 go also es sött uf dia standard eingabe blieba 
+            StartWeighttextBox.Text = UserProfile.StartWeight.ToString();
             StartDate.Content = DateTime.Now.ToString("dd.MM.yyyy");
 
             GoalDate.Content = UserProfile.GoalDate.ToString("dd.MM.yyyy"); 

@@ -12,10 +12,10 @@ namespace ErnaehrungsTracker.Models
         public DateTime GoalDate { get; set; }
 
 
-        public UserProfile(string name, double startWeight , double currentWeight, double goalWeight, DateTime startDate, DateTime goalDate)
+        public UserProfile(string name , double currentWeight, double goalWeight, DateTime startDate, DateTime goalDate)
         {
             Name = name;
-            StartWeight = startWeight;
+            StartWeight = currentWeight;
             CurrentWeight = currentWeight;
             GoalWeight = goalWeight;
             StartDate = startDate;
@@ -40,12 +40,18 @@ namespace ErnaehrungsTracker.Models
                 DateTime startDate = DateTime.Parse(parts[4]);
                 DateTime goalDate = DateTime.Parse(parts[5]);
 
-                return new UserProfile(name, startWeight, currentWeight, goalWeight, startDate, goalDate);
+                return new UserProfile(name, currentWeight, goalWeight, startDate, goalDate);
             }
             else
             {
                 throw new Exception("Die Datei hat ein ungültiges Format.");
             }
+        }
+        public double CalculateAverageDailyWeightLoss()
+        {
+            TimeSpan timeSpan = DateTime.Now - StartDate;
+            int daysPassed = timeSpan.Days > 0 ? timeSpan.Days : 1; 
+            return (StartWeight - CurrentWeight) / daysPassed;
         }
     }
 }
