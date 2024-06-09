@@ -19,7 +19,14 @@ namespace ErnaehrungsTracker
         private double trainingCalories = 0;
         private static bool isFirstRun = true;
 
-
+    // nicht erlauben von fenster vergrößern/verkleiner
+    // logging
+    // wenn essen hinzugefügt dann wieder remove, dann wird die kcal nicht mit removed
+    //  fenster close 
+    // Name absichern eingabe firstscreen
+    // kcal zentrieren water/km
+    
+    
         public MainWindow()
         {
             InitializeComponent();
@@ -62,8 +69,9 @@ namespace ErnaehrungsTracker
 
             UserProfile = new UserProfile(startScreen.inputName, startScreen.currentWeight, startScreen.goalWeight, startScreen.startDate, startScreen.goalDate);
             welcomeTextBox.Text = $"Welcome, {UserProfile.Name}!";
-
+            
             Calc_kg_to_kcal();
+            
         }
 
         public void Calc_kg_to_kcal()
@@ -205,15 +213,7 @@ namespace ErnaehrungsTracker
         }
 
 
-        private void openBreakfastMenu_Click(object sender, RoutedEventArgs e)
-        {
-            var openBreakfastScreen = new Breakfast();
-            openBreakfastScreen.ShowDialog();
-            breakfastTotalCalories += openBreakfastScreen.GetTotalCalories();
-            BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
-            Calc_kg_to_kcal(); 
-        }
-
+     
         private void ProfilButton_Click(object sender, RoutedEventArgs e)
         {
             Profil profilWindow = new Profil(UserProfile);
@@ -248,7 +248,15 @@ namespace ErnaehrungsTracker
             }
         }
 
-      
+        private void openBreakfastMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var openBreakfastScreen = new Breakfast();
+            openBreakfastScreen.ShowDialog();
+            breakfastTotalCalories += openBreakfastScreen.GetTotalCalories();
+            BreakFastKcal.Text = $"{breakfastTotalCalories} kcal";
+            Calc_kg_to_kcal(); 
+        }
+
 
         private void openLunchMenu_Click(object sender, RoutedEventArgs e)
         {

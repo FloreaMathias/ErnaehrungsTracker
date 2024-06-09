@@ -104,17 +104,17 @@
         </Canvas>
 
         <Canvas Width="120" Height="154" Background="#FF404040" Canvas.Left="647" Canvas.Top="181">
-            <Rectangle x:Name="TrainingBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="30" Canvas.Bottom="20"/>
+            <Rectangle x:Name="MealsBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="30" Canvas.Bottom="20"/>
             <TextBlock Canvas.Left="64" TextWrapping="Wrap" Text="Training"  Foreground="White" FontWeight="Bold" FontSize="8" FontFamily="Arial" Height="17" Width="32" RenderTransformOrigin="1.136,8.585" Canvas.Top="139" />
-            <Rectangle x:Name="MealsBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="70" Canvas.Bottom="20"/>
+            <Rectangle x:Name="TrainingBar" Width="20" Height="100" Fill="#FFC300FF" Canvas.Left="70" Canvas.Bottom="20"/>
             <TextBlock Canvas.Left="30" TextWrapping="Wrap" Text="Food"  Foreground="White" FontWeight="Bold" FontSize="8" FontFamily="Arial" Height="17" Width="20" RenderTransformOrigin="1.136,8.585" Canvas.Top="139" />
         </Canvas>
         <Rectangle Height="1" Canvas.Left="657" Stroke="Gray" Canvas.Top="315" Width="100"/>
 
 
         <Button x:Name="ProfilButton" Content="Profile" Canvas.Left="702" Canvas.Top="57" Height="30" Width="55" BorderBrush="#202020"  Style="{StaticResource RoundedButton}" BorderThickness="1"  Click="ProfilButton_Click" Background="White"/>
-
         <Button x:Name="btnstart" Content="Welcome, tap the screen to start!" Height="384" Width="800" Background="#272727" Foreground="White" FontSize="30" Click="btnstart_Click" Visibility="Visible"/> 
+
 
     </Canvas>
 </Window>
