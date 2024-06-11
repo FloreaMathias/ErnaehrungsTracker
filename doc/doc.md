@@ -80,10 +80,10 @@ ___
 ![alt text](image.png)
   - Der Startbildschirm begrüßt die Benutzer mit einer Einladung, die App zu starten: "Tap the screen to start." Dieser Willkommensbildschirm sorgt für eine benutzerfreundliche und interaktive Einführung. 
 
-![alt text](image-3.png)
+![alt text](image-1.png)
   - Hier geben die Benutzer ihre Informationen ein: Name, aktuelles Gewicht, Zielgewicht und das Datum, bis wann sie ihr Ziel erreichen möchten.
 
-![alt text](image-4.png)
+![alt text](image-2.png)
   - Dieses Fenster stellt das Hauptdashboard der Ernährungs- und Trainings-Tracking-App dar. Es bietet eine übersichtliche Darstellung der wichtigsten Informationen und Eingabemöglichkeiten.
 
   - Im oberen Bereich befindet sich die Kalorienübersicht. Hier werden die täglich angestrebte Kalorienmenge (Zielkalorien), die durch Nahrung aufgenommene Kalorienmenge (Food), die durch Training verbrannte Kalorienmenge (Training) sowie die verbleibende Kalorienmenge (Remaining) angezeigt, die der Benutzer noch aufnehmen kann, um sein Tagesziel zu erreichen.
@@ -98,9 +98,13 @@ ___
  
   - Oben rechts im Fenster befindet sich ein Button, der zum Profil des Benutzers führt. Hier kann der Benutzer weitere persönliche Informationen und Statistiken einsehen und anpassen.
 
-![alt text](image-1.png)
+![alt text](image-3.png)
  
   - Im Profilbereich hast du die Möglichkeit, dein aktuelles Gewicht anzupassen. Dort werden dir dein Startgewicht, dein aktuelles Gewicht und dein Zielgewicht angezeigt, sowie die noch erforderlichen Kilogramm, um dein Ziel zu erreichen. Zusätzlich kannst du deine Statistiken und den Fortschritt nach Land speichern. Eine Grafik bietet einen umfassenden Überblick über das gesamte Programm im zeitlichen Verlauf.
+
+![alt text](image-4.png)
+ 
+  - Hier kann der Benutzer bereits vorgegebene Mahlzeiten hinzufügen oder ganz einfach seine eigene.
 
 ---
 
